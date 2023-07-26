@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  namespace: jenkins
+  labels:
+    some-label: pod
+
+spec:
+    - name: docker
+      image: docker:19.03
+      command:
+        - cat
+      tty: true
+      privileged: true
+      volumeMounts:
+        - name: dockersock
+          mountPath: /var/run/docker.sock
+volumes:
+     - name: dockersock
+       hostPath:
+        path: /var/run/docker.sock
+
+  
